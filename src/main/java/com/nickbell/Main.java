@@ -32,6 +32,12 @@ public class Main {
         return true;
     }
 
+    public static void testValidChain() {
+        System.out.println( "Should be true : " + validChain());
+        blockChain.get( 1 ).hash = "this is different";
+        System.out.println( "Should be false : " + validChain() );
+    }
+
     public static void main(String[] args) {
 
         blockChain.add( new Block("Initial Block", "0") );
@@ -40,5 +46,7 @@ public class Main {
 
         String blockChainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockChain);
         System.out.println(blockChainJson);
+
+        testValidChain();
     }
 }
