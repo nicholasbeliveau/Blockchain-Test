@@ -21,7 +21,6 @@ public class StringUtil {
                 hexString.append( hex );
             }
 
-            System.out.println( "hexString : " + hexString.toString() );
             return hexString.toString();
         }
         catch ( Exception e ) {
