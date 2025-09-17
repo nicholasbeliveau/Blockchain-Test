@@ -8,6 +8,30 @@ public class Main {
 
     public static ArrayList<Block> blockChain = new ArrayList<Block>();
 
+    public static Boolean validChain() {
+
+        Block currentBlock;
+        Block previousBlock;
+
+        for ( int i=1; i < blockChain.size(); i++ ) {
+
+            currentBlock = blockChain.get(i);
+            previousBlock = blockChain.get(i-1);
+
+            // First check to make sure the has is the correct calculated hash
+            if ( !currentBlock.hash.equals( currentBlock.calculateHash() ) ) {
+                return false;
+            }
+
+            // Next, compare previous block's hash with what the current one has registered as previous
+            if( !previousBlock.hash.equals( currentBlock.previousHash ) ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
 
         blockChain.add( new Block("Initial Block", "0") );
