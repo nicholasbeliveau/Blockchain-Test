@@ -1,6 +1,7 @@
 package com.nickbell;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Block {
 
@@ -30,6 +31,7 @@ public class Block {
     public void mineBlock( int difficulty ) {
 
         String target = new String( new char[difficulty]).replace('\0', '0');
+        long startTime = System.nanoTime();
 
         while ( !hash.substring( 0, difficulty).equals(target) ) {
 
@@ -37,7 +39,10 @@ public class Block {
             hash = calculateHash();
         }
 
+        long elapsedTime = System.nanoTime() - startTime;
+
         System.out.println( "Block Mined : " + hash );
+        System.out.println( "Mined in " + TimeUnit.SECONDS.convert( elapsedTime, TimeUnit.NANOSECONDS ) + " seconds." );
     }
 
 

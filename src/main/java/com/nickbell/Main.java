@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static ArrayList<Block> blockChain = new ArrayList<Block>();
+
+    // Keeping this at 5.  Tested up to 7 and saw results anywhere from 13 seconds to 143 seconds.  5 works quickly
     public static int difficulty = 5;
 
     public static Boolean validChain() {
