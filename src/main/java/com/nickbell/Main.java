@@ -4,10 +4,12 @@ import com.google.gson.GsonBuilder;
 
 import java.security.Security;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
 
     public static ArrayList<Block> blockChain = new ArrayList<Block>();
+    public static HashMap< String, TransactionOutput > UTXOs = new HashMap< String, TransactionOutput>();
     // Keeping this at 5.  Tested up to 7 and saw results anywhere from 13 seconds to 143 seconds.  5 works quickly
     public static int difficulty = 5;
     public static Wallet walletOne;
