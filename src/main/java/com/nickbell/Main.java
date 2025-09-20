@@ -67,8 +67,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
-
+    public static void transactionTest() {
         Security.addProvider( new org.bouncycastle.jce.provider.BouncyCastleProvider() );
 
         walletOne = new Wallet();
@@ -86,5 +85,10 @@ public class Main {
         // Verify the signature
         System.out.println( "Is signature verified" );
         System.out.println( transaction.verifySignature() );
+    }
+
+    public static void main(String[] args) {
+
+        transactionTest();
     }
 }
