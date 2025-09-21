@@ -3,11 +3,15 @@ package com.nickbell;
 import java.security.KeyPairGenerator;
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Wallet {
 
     public PrivateKey privateKey;
     public PublicKey publicKey;
+
+    public HashMap< String, TransactionOutput > UTXOs = new HashMap< String, TransactionOutput >();
 
     public Wallet() {
         generateKeyPair();
@@ -35,5 +39,22 @@ public class Wallet {
         catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public float getBalance() {
+
+        float total = 0;
+
+        // Loop through UTXOs and add any that are the users to the total.
+        for ( Map.Entry< String, TransactionOutput > item: Main.UTXOs.entrySet() ) {
+            TransactionOutput UTXO = item.getValue();
+
+            if ( UTXO.isMine( publicKey ) ) {
+                UTXOs.put( UTXO.id, UTXO );
+                total += UTXO.value;
+            }
+        }
+
+        return total;
     }
 }
