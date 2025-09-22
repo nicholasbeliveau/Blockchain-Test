@@ -60,10 +60,10 @@ public class Block {
                 System.out.println( "Transaction failed to process." );
                 return false;
             }
-
-            transactions.add( transaction );
-            System.out.println( "Transaction added Successfully." );
-            return true;
         }
+
+        transactions.add( transaction );
+        System.out.println( "Transaction added Successfully." );
+        return true;
     }
 }
