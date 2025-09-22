@@ -9,12 +9,20 @@ public class Block {
 
     public String hash;
     public String previousHash;
+    public String data;
     public String merkleRoot;
     public ArrayList< Transaction > transactions = new ArrayList< Transaction >();
     private long timeStamp;
     private int nonce;
 
+    public Block( String previousHash ) {
+        this.previousHash = previousHash;
+        this.timeStamp = new Date().getTime();
+        this.hash = calculateHash();
+    }
+
     public Block( String data, String previousHash ) {
+        this.data = data;
         this.previousHash = previousHash;
         this.timeStamp = new Date().getTime();
         this.hash = calculateHash();
