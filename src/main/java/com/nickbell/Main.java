@@ -210,6 +210,12 @@ public class Main {
         System.out.println( "\nWalletOne's balance is : " + walletOne.getBalance() );
         System.out.println( "WalletTwo's balance is : " + walletTwo.getBalance() );
 
+        Block block3 = new Block( block2.hash );
+        System.out.println( "\nWalletTwo is attempting ot send funds (20) to WalletOne" );
+        block3.addTransaction( walletTwo.sendFunds(walletOne.publicKey, 20 ) );
+        System.out.println( "\nWalletOne's balance is : " + walletOne.getBalance() );
+        System.out.println( "WalletTwo's balance is : " + walletTwo.getBalance() );
+
         isChainValid();
     }
 }
