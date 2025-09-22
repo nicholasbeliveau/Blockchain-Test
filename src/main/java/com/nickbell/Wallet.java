@@ -88,6 +88,8 @@ public class Wallet {
             UTXOs.remove( input.transactionOutputId );
         }
 
+        System.out.println( "Sending : " + transaction.value );
+
         return transaction;
     }
 }
