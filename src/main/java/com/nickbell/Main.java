@@ -203,6 +203,13 @@ public class Main {
         System.out.println( "\nWalletOne's balance is : " + walletOne.getBalance() );
         System.out.println( "WalletTwo's balance is : " + walletTwo.getBalance() );
 
+        Block block2 = new Block( block1.hash );
+        System.out.println( "\nWalletOne attempting ot send more funds (1000) than it has" );
+        block2.addTransaction( walletOne.sendFunds( walletTwo.publicKey, 1000f ) );
+        addBlock( block2 );
+        System.out.println( "\nWalletOne's balance is : " + walletOne.getBalance() );
+        System.out.println( "WalletTwo's balance is : " + walletTwo.getBalance() );
+
         isChainValid();
     }
 }
