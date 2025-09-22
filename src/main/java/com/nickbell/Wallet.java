@@ -3,6 +3,7 @@ package com.nickbell;
 import java.security.KeyPairGenerator;
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,5 +57,37 @@ public class Wallet {
         }
 
         return total;
+    }
+
+    public Transaction sendFunds( PublicKey _recipient, float value ) {
+
+        float total = 0;
+
+        if ( getBalance() < value ) {
+            System.out.println( "Not enough funds to send the transaction.");
+            System.out.println( "Current balance is : " + getBalance() );
+            System.out.println( "Attempted Transaction : " + value );
+            return null;
+        }
+
+        ArrayList< TransactionInput > inputs = new ArrayList< TransactionInput >();
+
+        for ( Map.Entry< String, TransactionOutput > item : UTXOs.entrySet() ) {
+
+            TransactionOutput UTXO = item.getValue();
+            total += UTXO.value;
+            inputs.add( new TransactionInput( UTXO.id ) );
+            if ( total > value ) break;
+        }
+
+        Transaction transaction = new Transaction( publicKey, _recipient, value, inputs );
+        transaction.generateSignature( privateKey );
+
+        for( TransactionInput input: inputs ) {
+
+            UTXOs.remove( input.transactionOutputId );
+        }
+
+        return transaction;
     }
 }
